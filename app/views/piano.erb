@@ -21,17 +21,27 @@
   }
 
 
-  document.onkeydown=function(evt){
-      var keyCode = evt ? (evt.which ? evt.which : evt.keyCode) : event.keyCode;
-      if(keyCode == 65){playSine(0, -9, 0.1)}
-      if(keyCode == 83){playSine(0, -7, 0.1)}
-      if(keyCode == 68){playSine(0, -5, 0.1)}
-      if(keyCode == 70){playSine(0, -4, 0.1)}
-      if(keyCode == 71){playSine(0, -2, 0.1)}
-      if(keyCode == 72){playSine(0, 0, 0.1)}
-      if(keyCode == 74){playSine(0, 2, 0.1)}
-      if(keyCode == 75){playSine(0, 3, 0.1)}
+
+  var keys = [];
+  document.onkeydown = onkeyup = function(e){
+      e = e || event;
+      keys[e.keyCode] = e.type == 'keydown';
+      if(keys[65]){playSine(0, -9, 0.1)}
+      if(keys[87]){playSine(0, -8, 0.1)}
+      if(keys[83]){playSine(0, -7, 0.1)}
+      if(keys[69]){playSine(0, -6, 0.1)}
+      if(keys[68]){playSine(0, -5, 0.1)}
+      if(keys[70]){playSine(0, -4, 0.1)}
+      if(keys[84]){playSine(0, -3, 0.1)}
+      if(keys[71]){playSine(0, -2, 0.1)}
+      if(keys[89]){playSine(0, -1, 0.1)}
+      if(keys[72]){playSine(0, 0, 0.1)}
+      if(keys[85]){playSine(0, 1, 0.1)}
+      if(keys[74]){playSine(0, 2, 0.1)}
+      if(keys[75]){playSine(0, 3, 0.1)}
   }
+
+
 </script>
 
 <b>Key: Note</b>

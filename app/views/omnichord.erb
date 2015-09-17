@@ -36,6 +36,7 @@ document.onkeydown=function(evt){
   }
   if(bassKeyCode == 90){
     document.onkeydown=function(evt){
+        bassKeyCode != 65
         var keyCode = evt ? (evt.which ? evt.which : evt.keyCode) : event.keyCode;
         if(keyCode == 85){playSine(0, -2,  0.1)}
         if(keyCode == 73){playSine(0, +2,  0.1)}
@@ -47,6 +48,11 @@ document.onkeydown=function(evt){
     }
   }
 }
+
+document.onkeyup=function(evt){
+  var bassKeyCode = evt ? (evt.which ? evt.which : evt.bassKeyCode) : event.bassKeyCode;
+}
+
 </script>
 
 <b>This is going to be an omnichord.  buttons:</b>
