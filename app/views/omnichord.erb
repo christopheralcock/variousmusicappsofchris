@@ -1,0 +1,70 @@
+<script>
+  var audioContext = new AudioContext()
+
+  function playSine(delay, pitch, duration) {
+    var startTime = audioContext.currentTime + delay
+    var endTime = startTime + duration
+
+    var envelope = audioContext.createGain()
+    envelope.connect(audioContext.destination)
+    envelope.gain.value = 0
+    envelope.gain.setTargetAtTime(1, startTime, 0.1)
+    envelope.gain.setTargetAtTime(0, endTime, 0.2)
+
+    var oscillator = audioContext.createOscillator()
+    oscillator.connect(envelope)
+    oscillator.type = 'sine'
+    oscillator.detune.value = pitch * 100
+
+    oscillator.start(startTime)
+    oscillator.stop(endTime + 2)
+  }
+
+
+document.onkeydown=function(evt){
+  var bassKeyCode = evt ? (evt.which ? evt.which : evt.bassKeyCode) : event.bassKeyCode;
+  if(bassKeyCode == 65){
+    document.onkeydown=function(evt){
+        var keyCode = evt ? (evt.which ? evt.which : evt.keyCode) : event.keyCode;
+        if(keyCode == 85){playSine(0, -2,  0.1)}
+        if(keyCode == 73){playSine(0, +3,  0.1)}
+        if(keyCode == 79){playSine(0, +7,  0.1)}
+        if(keyCode == 80){playSine(0, +10, 0.1)}
+        if(keyCode == 65){playSine(0, -21, 1)}
+        if(keyCode == 65){playSine(0, -9,  1)}
+    }
+  }
+  if(bassKeyCode == 90){
+    document.onkeydown=function(evt){
+        var keyCode = evt ? (evt.which ? evt.which : evt.keyCode) : event.keyCode;
+        if(keyCode == 85){playSine(0, -2,  0.1)}
+        if(keyCode == 73){playSine(0, +2,  0.1)}
+        if(keyCode == 79){playSine(0, +5,  0.1)}
+        if(keyCode == 80){playSine(0, +10, 0.1)}
+        if(keyCode == 90){playSine(0, -14, 1)}
+        if(keyCode == 90){playSine(0, -26, 1)}
+
+    }
+  }
+}
+</script>
+
+<b>This is going to be an omnichord.  buttons:</b>
+  <ul>
+    <li>Q: Major</li>
+    <li>W: Minor</li>
+    <li>E: 7th</li>
+    <li>`&N: F chord</li>
+    <li>A: C chord</li>
+    <li>Z: G chord</li>
+    <li>  S: D chord</li>
+    <li>X: A chord</li>
+    <li>D: E chord</li>
+    <li>C: B chord</li>
+    <li>F: F# chord</li>
+    <li>V: C# chord</li>
+    <li>G: G# chord</li>
+    <li>B: D# chord</li>
+    <li>H: A# chord</li>
+    <li>U, I, O & P: strum bar, playing the 4 appropriate notes of the inversion. pedal bass comes from the chord </li>
+</ul>
