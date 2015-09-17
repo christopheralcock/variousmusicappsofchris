@@ -21,33 +21,34 @@
   }
 
 
-document.onkeydown=function(evt){
-  var bassKeyCode = evt ? (evt.which ? evt.which : evt.bassKeyCode) : event.bassKeyCode;
-  if(bassKeyCode == 65){
-    document.onkeydown=function(evt){
-        var keyCode = evt ? (evt.which ? evt.which : evt.keyCode) : event.keyCode;
-        if(keyCode == 85){playSine(0, -2,  0.1)}
-        if(keyCode == 73){playSine(0, +3,  0.1)}
-        if(keyCode == 79){playSine(0, +7,  0.1)}
-        if(keyCode == 80){playSine(0, +10, 0.1)}
-        if(keyCode == 65){playSine(0, -21, 1)}
-        if(keyCode == 65){playSine(0, -9,  1)}
-    }
-  }
-  if(bassKeyCode == 90){
-    document.onkeydown=function(evt){
-        bassKeyCode != 65
-        var keyCode = evt ? (evt.which ? evt.which : evt.keyCode) : event.keyCode;
-        if(keyCode == 85){playSine(0, -2,  0.1)}
-        if(keyCode == 73){playSine(0, +2,  0.1)}
-        if(keyCode == 79){playSine(0, +5,  0.1)}
-        if(keyCode == 80){playSine(0, +10, 0.1)}
-        if(keyCode == 90){playSine(0, -14, 1)}
-        if(keyCode == 90){playSine(0, -26, 1)}
 
-    }
+  var keys = [];
+  document.onkeydown = onkeyup = function(e){
+      e = e || event;
+      keys[e.keyCode] = e.type == 'keydown';
+      // c
+      if(keys[65]){playSine(0, -21, 1)}
+      if(keys[65]){playSine(0, -9,  1)}
+      if(keys[65] && keys[85]){playSine(0, -2, 0.1)}
+      if(keys[65] && keys[73]){playSine(0, +3, 0.1)}
+      if(keys[65] && keys[79]){playSine(0, +7, 0.1)}
+      if(keys[65] && keys[80]){playSine(0, +10, 0.1)}
+      // g
+      if(keys[90]){playSine(0, -14, 1)}
+      if(keys[90]){playSine(0, -26, 1)}
+      if(keys[90] && keys[85]){playSine(0, -2, 0.1)}
+      if(keys[90] && keys[73]){playSine(0, +2, 0.1)}
+      if(keys[90] && keys[79]){playSine(0, +5, 0.1)}
+      if(keys[90] && keys[80]){playSine(0, +10, 0.1)}
+      // f
+      if(keys[192]){playSine(0, -16, 1)}
+      if(keys[192]){playSine(0, -28, 1)}
+      if(keys[192] && keys[85]){playSine(0, -4, 0.1)}
+      if(keys[192] && keys[73]){playSine(0, +0, 0.1)}
+      if(keys[192] && keys[79]){playSine(0, +3, 0.1)}
+      if(keys[192] && keys[80]){playSine(0, +8, 0.1)}
   }
-}
+
 
 document.onkeyup=function(evt){
   var bassKeyCode = evt ? (evt.which ? evt.which : evt.bassKeyCode) : event.bassKeyCode;
