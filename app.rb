@@ -6,7 +6,7 @@ require 'sinatra/flash'
 class SimplePiano < Sinatra::Base
   register Sinatra::Flash
   use Rack::MethodOverride
-  set :public, Proc.new { File.join(root, "app/public") }
+  # set :public, Proc.new { File.join(root, "app/public") }
 
 
   get '/piano' do
