@@ -1,81 +1,8 @@
-<script>
-  var audioContext = new AudioContext()
-
-  function playSine(delay, pitch, duration) {
-    var startTime = audioContext.currentTime + delay
-    var endTime = startTime + duration
-
-    var envelope = audioContext.createGain()
-    envelope.connect(audioContext.destination)
-    envelope.gain.value = 0
-    envelope.gain.setTargetAtTime(1, startTime, 0.1)
-    envelope.gain.setTargetAtTime(0, endTime, 0.2)
-
-    var oscillator = audioContext.createOscillator()
-    oscillator.connect(envelope)
-    oscillator.type = 'sine'
-    oscillator.detune.value = pitch * 100
-
-    oscillator.start(startTime)
-    oscillator.stop(endTime + 2)
-  }
-
-
-
-  var keys = [];
-  document.onkeydown = onkeyup = function(e){
-      e = e || event;
-      keys[e.keyCode] = e.type == 'keydown';
-      // c
-      if(keys[65]){playSine(0, -21, .1)}
-      if(keys[65]){playSine(0, -9,  .1)}
-      if(keys[65] && keys[85]){playSine(0, -2, 0.1)}
-      if(keys[65] && keys[73]){playSine(0, +3, 0.1)}
-      if(keys[65] && keys[79]){playSine(0, +7, 0.1)}
-      if(keys[65] && keys[80]){playSine(0, +10, 0.1)}
-      // g
-      if(keys[90]){playSine(0, -14, .1)}
-      if(keys[90]){playSine(0, -26, .1)}
-      if(keys[90] && keys[85]){playSine(0, -2, 0.1)}
-      if(keys[90] && keys[73]){playSine(0, +2, 0.1)}
-      if(keys[90] && keys[79]){playSine(0, +5, 0.1)}
-      if(keys[90] && keys[80]){playSine(0, +10, 0.1)}
-      // f
-      if(keys[192]){playSine(0, -16, .1)}
-      if(keys[192]){playSine(0, -28, .1)}
-      if(keys[192] && keys[85]){playSine(0, -4, 0.1)}
-      if(keys[192] && keys[73]){playSine(0, +0, 0.1)}
-      if(keys[192] && keys[79]){playSine(0, +3, 0.1)}
-      if(keys[192] && keys[80]){playSine(0, +8, 0.1)}
-      // a minor
-      if(keys[88]){playSine(0, -12, .1)}
-      if(keys[88]){playSine(0, -24, .1)}
-      if(keys[88] && keys[85]){playSine(0, +0, 0.1)}
-      if(keys[88] && keys[73]){playSine(0, +3, 0.1)}
-      if(keys[88] && keys[79]){playSine(0, +7, 0.1)}
-      if(keys[88] && keys[80]){playSine(0, +12, 0.1)}
-      // d minor
-      if(keys[83]){playSine(0, -19, .1)}
-      if(keys[83]){playSine(0, -7, .1)}
-      if(keys[83] && keys[85]){playSine(0, -4, 0.1)}
-      if(keys[83] && keys[73]){playSine(0, +0, 0.1)}
-      if(keys[83] && keys[79]){playSine(0, +5, 0.1)}
-      if(keys[83] && keys[80]){playSine(0, +8, 0.1)}
-      // e minor
-      if(keys[68]){playSine(0, -17, .1)}
-      if(keys[68]){playSine(0, -5, .1)}
-      if(keys[68] && keys[85]){playSine(0, -2, 0.1)}
-      if(keys[68] && keys[73]){playSine(0, +2, 0.1)}
-      if(keys[68] && keys[79]){playSine(0, +7, 0.1)}
-      if(keys[68] && keys[80]){playSine(0, +10, 0.1)}
-  }
-
-
-document.onkeyup=function(evt){
-  var bassKeyCode = evt ? (evt.which ? evt.which : evt.bassKeyCode) : event.bassKeyCode;
-}
-
-</script>
+<script src="/playSine.js"></script>
+<script src="/noteTranslator.js"></script>
+<script src="/keyTranslator.js"></script>
+<script src="/pitchchangers.js"></script>
+<script src="/omnichordKeys.js"></script>
 
 <h1>This is an omnichord.</h1>
 
