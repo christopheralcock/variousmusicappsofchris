@@ -26,19 +26,150 @@
   document.onkeydown = onkeyup = function(e){
       e = e || event;
       keys[e.keyCode] = e.type == 'keydown';
-      if(keys[65]){playSine(0, -9, 0.1)}
-      if(keys[87]){playSine(0, -8, 0.1)}
-      if(keys[83]){playSine(0, -7, 0.1)}
-      if(keys[69]){playSine(0, -6, 0.1)}
-      if(keys[68]){playSine(0, -5, 0.1)}
-      if(keys[70]){playSine(0, -4, 0.1)}
-      if(keys[84]){playSine(0, -3, 0.1)}
-      if(keys[71]){playSine(0, -2, 0.1)}
-      if(keys[89]){playSine(0, -1, 0.1)}
-      if(keys[72]){playSine(0, 0, 0.1)}
-      if(keys[85]){playSine(0, 1, 0.1)}
-      if(keys[74]){playSine(0, 2, 0.1)}
-      if(keys[75]){playSine(0, 3, 0.1)}
+
+      var backspaceKey = keys[8]
+      var tabKey = keys[9]
+      var enterKey = keys[13]
+      var shiftKey = keys[16]
+      var ctrlKey = keys[17]
+      var altKey = keys[18]
+      var pauseBreakKey = keys[19]
+      var capsLockKey = keys[20]
+      var escapeKey = keys[27]
+      var pageUpKey = keys[33]
+      var pageDownKey = keys[34]
+      var endKey = keys[35]
+      var homeKey = keys[36]
+      var leftArrowKey = keys[37]
+      var upArrowKey = keys[38]
+      var rightArrowKey = keys[39]
+      var downArrowKey = keys[40]
+      var insertKey = keys[45]
+      var deleteKey = keys[46]
+      var num0Key = keys[48]
+      var num1Key = keys[49]
+      var num2Key = keys[50]
+      var num3Key = keys[51]
+      var num4Key = keys[52]
+      var num5Key = keys[53]
+      var num6Key = keys[54]
+      var num7Key = keys[55]
+      var num8Key = keys[56]
+      var num9Key = keys[57]
+      var aKey = keys[65]
+      var bKey = keys[66]
+      var cKey = keys[67]
+      var dKey = keys[68]
+      var eKey = keys[69]
+      var fKey = keys[70]
+      var gKey = keys[71]
+      var hKey = keys[72]
+      var iKey = keys[73]
+      var jKey = keys[74]
+      var kKey = keys[75]
+      var lKey = keys[76]
+      var mKey = keys[77]
+      var nKey = keys[78]
+      var oKey = keys[79]
+      var pKey = keys[80]
+      var qKey = keys[81]
+      var rKey = keys[82]
+      var sKey = keys[83]
+      var tKey = keys[84]
+      var uKey = keys[85]
+      var vKey = keys[86]
+      var wKey = keys[87]
+      var xKey = keys[88]
+      var yKey = keys[89]
+      var zKey = keys[90]
+      var leftWindowKeyKey = keys[91]
+      var rightWindowKeyKey = keys[92]
+      var selectKeyKey = keys[93]
+      var numpad0Key = keys[96]
+      var numpad1Key = keys[97]
+      var numpad2Key = keys[98]
+      var numpad3Key = keys[99]
+      var numpad4key = keys[100]
+      var numpad5Key = keys[101]
+      var numpad6Key = keys[102]
+      var numpad7Key = keys[103]
+      var numpad8Key = keys[104]
+      var numpad9Key = keys[105]
+      var multiplyKey = keys[106]
+      var addKey = keys[107]
+      var subtractKey = keys[109]
+      var decimalPointKey = keys[110]
+      var divideKey = keys[111]
+      var f1Key = keys[112]
+      var f2Key = keys[113]
+      var f3Key = keys[114]
+      var f4Key = keys[115]
+      var f5Key = keys[116]
+      var f6Key = keys[117]
+      var f7Key = keys[118]
+      var f8Key = keys[119]
+      var f9Key = keys[120]
+      var f10Key = keys[121]
+      var f11Key = keys[122]
+      var f12Key = keys[123]
+      var numLockKey = keys[144]
+      var scrollLockKey = keys[145]
+      var semiColonKey = keys[186]
+      var equalSignKey = keys[187]
+      var commaKey = keys[188]
+      var dashKey = keys[189]
+      var periodKey = keys[190]
+      var forwardSlashKey = keys[191]
+      var graveAccentKey = keys[192]
+      var openBracketKey = keys[219]
+      var backSlashKey = keys[220]
+      var closeBraketKey = keys[221]
+      var singleQuoteKey = keys[222]
+
+
+      var cNote = 3
+      var dNote = 5
+      var eNote = 7
+      var fNote = 8
+      var gNote = 10
+      var aNote = 12
+      var bNote = 14
+
+      sharpen = function(note){
+        sharpNote = note +1
+        return sharpNote
+      }
+
+      flatten = function(note){
+        sharpNote = note +1
+        return sharpNote
+      }
+
+      octaveChooser = function(note, octaveNumber){
+        octavedNote = note - (4-octaveNumber)*12
+        return octavedNote
+      }
+
+      if(aKey){playSine(0, octaveChooser(cNote, 3), 0.1)}
+      if(wKey){playSine(0, octaveChooser(sharpen(cNote), 3), 0.1)}
+      if(sKey){playSine(0, octaveChooser(dNote, 3), 0.1)}
+      if(eKey){playSine(0, octaveChooser(sharpen(dNote), 3), 0.1)}
+      if(dKey){playSine(0, octaveChooser(eNote, 3), 0.1)}
+      if(fKey){playSine(0, octaveChooser(fNote, 3), 0.1)}
+      if(tKey){playSine(0, octaveChooser(sharpen(fNote), 3), 0.1)}
+      if(gKey){playSine(0, octaveChooser(gNote, 3), 0.1)}
+      if(yKey){playSine(0, octaveChooser(sharpen(gNote), 3), 0.1)}
+      if(hKey){playSine(0, octaveChooser(aNote, 3), 0.1)}
+      if(uKey){playSine(0, octaveChooser(sharpen(aNote), 3), 0.1)}
+      if(jKey){playSine(0, octaveChooser(bNote, 3), 0.1)}
+      if(kKey){playSine(0, octaveChooser(cNote, 4), 0.1)}
+      if(oKey){playSine(0, octaveChooser(sharpen(cNote), 4), 0.1)}
+      if(lKey){playSine(0, octaveChooser(dNote, 4), 0.1)}
+      if(pKey){playSine(0, octaveChooser(sharpen(dNote), 4), 0.1)}
+      if(semiColonKey){playSine(0, octaveChooser(eNote, 4), 0.1)}
+      if(singleQuoteKey){playSine(0, octaveChooser(fNote, 4), 0.1)}
+      if(closeBraketKey){playSine(0, octaveChooser(sharpen(fNote), 4), 0.1)}
+      if(backSlashKey){playSine(0, octaveChooser(gNote, 4), 0.1)}
   }
 
 
