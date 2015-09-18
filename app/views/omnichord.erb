@@ -27,33 +27,47 @@
       e = e || event;
       keys[e.keyCode] = e.type == 'keydown';
       // c
-      if(keys[65]){playSine(0, -21, 1)}
-      if(keys[65]){playSine(0, -9,  1)}
+      if(keys[65]){playSine(0, -21, .1)}
+      if(keys[65]){playSine(0, -9,  .1)}
       if(keys[65] && keys[85]){playSine(0, -2, 0.1)}
       if(keys[65] && keys[73]){playSine(0, +3, 0.1)}
       if(keys[65] && keys[79]){playSine(0, +7, 0.1)}
       if(keys[65] && keys[80]){playSine(0, +10, 0.1)}
       // g
-      if(keys[90]){playSine(0, -14, 1)}
-      if(keys[90]){playSine(0, -26, 1)}
+      if(keys[90]){playSine(0, -14, .1)}
+      if(keys[90]){playSine(0, -26, .1)}
       if(keys[90] && keys[85]){playSine(0, -2, 0.1)}
       if(keys[90] && keys[73]){playSine(0, +2, 0.1)}
       if(keys[90] && keys[79]){playSine(0, +5, 0.1)}
       if(keys[90] && keys[80]){playSine(0, +10, 0.1)}
       // f
-      if(keys[192]){playSine(0, -16, 1)}
-      if(keys[192]){playSine(0, -28, 1)}
+      if(keys[192]){playSine(0, -16, .1)}
+      if(keys[192]){playSine(0, -28, .1)}
       if(keys[192] && keys[85]){playSine(0, -4, 0.1)}
       if(keys[192] && keys[73]){playSine(0, +0, 0.1)}
       if(keys[192] && keys[79]){playSine(0, +3, 0.1)}
       if(keys[192] && keys[80]){playSine(0, +8, 0.1)}
       // a minor
-      if(keys[88]){playSine(0, -12, 1)}
-      if(keys[88]){playSine(0, -24, 1)}
+      if(keys[88]){playSine(0, -12, .1)}
+      if(keys[88]){playSine(0, -24, .1)}
       if(keys[88] && keys[85]){playSine(0, +0, 0.1)}
       if(keys[88] && keys[73]){playSine(0, +3, 0.1)}
       if(keys[88] && keys[79]){playSine(0, +7, 0.1)}
       if(keys[88] && keys[80]){playSine(0, +12, 0.1)}
+      // d minor
+      if(keys[83]){playSine(0, -19, .1)}
+      if(keys[83]){playSine(0, -7, .1)}
+      if(keys[83] && keys[85]){playSine(0, -4, 0.1)}
+      if(keys[83] && keys[73]){playSine(0, +0, 0.1)}
+      if(keys[83] && keys[79]){playSine(0, +5, 0.1)}
+      if(keys[83] && keys[80]){playSine(0, +8, 0.1)}
+      // e minor
+      if(keys[68]){playSine(0, -17, .1)}
+      if(keys[68]){playSine(0, -5, .1)}
+      if(keys[68] && keys[85]){playSine(0, -2, 0.1)}
+      if(keys[68] && keys[73]){playSine(0, +2, 0.1)}
+      if(keys[68] && keys[79]){playSine(0, +7, 0.1)}
+      if(keys[68] && keys[80]){playSine(0, +10, 0.1)}
   }
 
 
@@ -63,7 +77,11 @@ document.onkeyup=function(evt){
 
 </script>
 
-<b>This is going to be an omnichord.  buttons:</b>
+<h1>This is an omnichord.</h1>
+
+<p>you need to hold down a chord button for the 'strum bar' to work</p>
+
+<b>buttons:</b>
   <ul>
     <!-- <li>Q: Major</li>
     <li>W: Minor</li> -->
@@ -71,10 +89,10 @@ document.onkeyup=function(evt){
     <li>`: F Major</li>
     <li>A: C Major</li>
     <li>Z: G Major</li>
-    <!-- <li>S: D chord</li> -->
-    <li>X: A Minor</li>
-    <!-- <li>D: E chord</li>
-    <li>C: B chord</li>
+    <li>S: D minor</li>
+    <li>X: A minor</li>
+    <li>D: E minor</li>
+    <!-- <li>C: B chord</li>
     <li>F: F# chord</li>
     <li>V: C# chord</li>
     <li>G: G# chord</li>
