@@ -11,6 +11,7 @@ function omnichordSetup(note, chord, keyboardKey){
     if(keyboardKey && keys.o){playSine(0, chord[2], 0.1)};
     if(keyboardKey && keys.p){playSine(0, chord[3], 0.1)};
     if(keyboardKey && keys.openBracket){playSine(0, chord[4], 0.1)};
+    if(keyboardKey && keys.closeBracket){playSine(0, chord[5], 0.1)};
 };
 
   document.onkeydown = onkeyup = function(e){
@@ -28,6 +29,7 @@ function omnichordSetup(note, chord, keyboardKey){
         majorThirdUp = root + 4;
         fifthUp = root + 7;
         octaveUp = root + 12;
+        majorTenthUp = root + 16;
         if (octaveDown > lowest){fourNotes.push(octaveDown)};
         if (sixthDown > lowest){fourNotes.push(sixthDown)};
         if (fourthDown > lowest){fourNotes.push(fourthDown)};
@@ -35,6 +37,7 @@ function omnichordSetup(note, chord, keyboardKey){
         if (majorThirdUp > lowest){fourNotes.push(majorThirdUp)};
         if (fifthUp > lowest){fourNotes.push(fifthUp)};
         if (octaveUp > lowest){fourNotes.push(octaveUp)};
+        if (majorTenthUp > lowest){fourNotes.push(majorTenthUp)};
         return fourNotes;
       };
 
@@ -48,6 +51,7 @@ function omnichordSetup(note, chord, keyboardKey){
         minorThirdUp = root + 3;
         fifthUp = root + 7;
         octaveUp = root + 12;
+        minorTenthUp = root + 15;
         if (octaveDown > lowest){fourNotes.push(octaveDown)};
         if (sixthDown > lowest){fourNotes.push(sixthDown)};
         if (fourthDown > lowest){fourNotes.push(fourthDown)};
@@ -55,6 +59,7 @@ function omnichordSetup(note, chord, keyboardKey){
         if (minorThirdUp > lowest){fourNotes.push(minorThirdUp)};
         if (fifthUp > lowest){fourNotes.push(fifthUp)};
         if (octaveUp > lowest){fourNotes.push(octaveUp)};
+        if (minorTenthUp > lowest){fourNotes.push(minorTenthUp)};
         return fourNotes;
       };
 
@@ -67,6 +72,7 @@ function omnichordSetup(note, chord, keyboardKey){
         minorThirdUp = root + 3;
         diminishedFifthUp = root + 8;
         octaveUp = root + 12;
+        minorTenthUp = root + 15;
         if (octaveDown > lowest){fourNotes.push(octaveDown)};
         if (sixthDown > lowest){fourNotes.push(sixthDown)};
         if (augmentedFourthDown > lowest){fourNotes.push(augmentedFourthDown)};
@@ -74,6 +80,7 @@ function omnichordSetup(note, chord, keyboardKey){
         if (minorThirdUp > lowest){fourNotes.push(minorThirdUp)};
         if (diminishedFifthUp > lowest){fourNotes.push(diminishedFifthUp)};
         if (octaveUp > lowest){fourNotes.push(octaveUp)};
+        if (minorTenthUp > lowest){fourNotes.push(minorTenthUp)};
         return fourNotes;
       };
 

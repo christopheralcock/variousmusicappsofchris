@@ -95,7 +95,7 @@ function keyTranslator(keys) {
     graveAccent: keys[192],
     openBracket: keys[219],
     backSlash: keys[220],
-    closeBraket: keys[221],
+    closeBracket: keys[221],
     singleQuote: keys[222]
   }
 }
