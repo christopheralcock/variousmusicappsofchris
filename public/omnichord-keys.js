@@ -8,24 +8,27 @@ var notes;
       keySet[e.keyCode] = e.type == 'keydown';
       keys = keyTranslator(keySet);
       notes = noteTranslator(notes);
-      // f major
-      if(keys.graveAccent){playSineWithBassOctave(0, octaveChooser(notes.f, 3), .1)}
-      if(keys.graveAccent && keys.u){playSine(0, octaveChooser(notes.f, 3), 0.1)}
-      if(keys.graveAccent && keys.i){playSine(0, octaveChooser(notes.a, 3), 0.1)}
-      if(keys.graveAccent && keys.o){playSine(0, octaveChooser(notes.c, 4), 0.1)}
-      if(keys.graveAccent && keys.p){playSine(0, octaveChooser(notes.f, 4), 0.1)}
-      // c major
-      if(keys.a){playSineWithBassOctave(0, octaveChooser(notes.c, 3),  0.1)};
-      if(keys.a && keys.u){playSine(0, octaveChooser(notes.g, 3), 0.1)};
-      if(keys.a && keys.i){playSine(0, octaveChooser(notes.c, 4), 0.1)};
-      if(keys.a && keys.o){playSine(0, octaveChooser(notes.e, 4), 0.1)};
-      if(keys.a && keys.p){playSine(0, octaveChooser(notes.g, 4), 0.1)};
-      // g major
-      if(keys.z){playSineWithBassOctave(0, octaveChooser(notes.g, 3),  0.1)};
-      if(keys.z && keys.u){playSine(0, octaveChooser(notes.g, 3), 0.1)};
-      if(keys.z && keys.i){playSine(0, octaveChooser(notes.b, 3), 0.1)};
-      if(keys.z && keys.o){playSine(0, octaveChooser(notes.d, 4), 0.1)};
-      if(keys.z && keys.p){playSine(0, octaveChooser(notes.g, 4), 0.1)};
+
+
+      var major = {
+        c: [octaveChooser(notes.g, 3), octaveChooser(notes.c, 4), octaveChooser(notes.e, 4), octaveChooser(notes.g, 4)],
+        f: [octaveChooser(notes.f, 3), octaveChooser(notes.a, 3), octaveChooser(notes.c, 4), octaveChooser(notes.f, 4)]
+      }
+
+      function omnichordSetup(note, chord, keyboardKey, noteLetter){
+        // return {
+          if(keyboardKey){playSineWithBassOctave(0, octaveChooser(note, 3),  0.1)};
+          if(keyboardKey && keys.u){playSine(0, chord[0], 0.1)};
+          if(keyboardKey && keys.i){playSine(0, chord[1], 0.1)};
+          if(keyboardKey && keys.o){playSine(0, chord[2], 0.1)};
+          if(keyboardKey && keys.p){playSine(0, chord[3], 0.1)};
+        // };
+      };
+
+      omnichordSetup(notes.c, major.c, keys.a);
+      omnichordSetup(notes.f, major.f, keys.graveAccent);
+      omnichordSetup(notes.g, major.g, keys.z);
+
       // a minor
       if(keys.x){playSineWithBassOctave(0, octaveChooser(notes.a, 3),  0.1)};
       if(keys.x && keys.u){playSine(0, octaveChooser(notes.a, 3), 0.1)};
