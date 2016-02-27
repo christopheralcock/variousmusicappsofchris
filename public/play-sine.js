@@ -15,7 +15,6 @@ function playSine(delay, pitch, duration) {
   oscillator1.start(startTime);
   oscillator1.stop(endTime + 2);
 
-
   updateNoteArray(pitch);
 
 }
