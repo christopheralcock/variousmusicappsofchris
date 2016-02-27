@@ -21,5 +21,11 @@ class SimplePiano < Sinatra::Base
     erb :omnichord
   end
 
+  get '/tesla' do
+    erb :tesla
+  end
+
+
+
   run! if app_file == $0
 end

@@ -28,7 +28,7 @@ function logSuccess(){
 }
 
 function httpGet(theUrl){
-    document.getElementById('picture').innerHTML = "<img src='https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcT9F65NQ7VPlfjnscDiW-2HWVmVVkOKBHgjxpqp_qJPmLJPYjYrhg'/>";
+    document.getElementById('picture').innerHTML = "<img style='position:fixed;top:0px;left:0px;width:100%;height:100%;z-index:-1;' src='http://memesvault.com/wp-content/uploads/Sloth-Goonies-Hey-You-Guys-08.gif'/>";
     var xmlHttp = new XMLHttpRequest();
     xmlHttp.open( "GET", theUrl, false ); // false for synchronous request
     xmlHttp.send( null );
