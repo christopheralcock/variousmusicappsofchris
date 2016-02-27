@@ -29,7 +29,7 @@ function logSuccess(){
 
 function httpGet(theUrl){
     // document.getElementById('picture').innerHTML = "<img style='position:fixed;top:0px;left:0px;width:100%;height:100%;z-index:-1;' src='http://memesvault.com/wp-content/uploads/Sloth-Goonies-Hey-You-Guys-08.gif'/>";
-    document.getElementById('picture').innerHTML = '<iframe style="position:fixed;top:0px;left:0px;width:100%;height:100%;z-index:-1;" width="560" height="315" src="https://www.youtube.com/embed/4Vv5CsP1pAg?autoplay=1&showinfo=0" frameborder="0" allowfullscreen></iframe>';
+    document.getElementById('picture').innerHTML = '<iframe style="position:fixed;top:0px;left:0px;width:100%;height:100%;z-index:-1;" width="560" height="315" src="https://www.youtube.com/embed/4Vv5CsP1pAg?autoplay=1&showinfo=0&loop=1&playlist=4Vv5CsP1pAg" frameborder="0" allowfullscreen></iframe>';
     var xmlHttp = new XMLHttpRequest();
     xmlHttp.open( "GET", theUrl, false ); // false for synchronous request
     xmlHttp.send( null );
