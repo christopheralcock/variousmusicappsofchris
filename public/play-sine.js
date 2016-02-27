@@ -22,10 +22,19 @@ function playSine(delay, pitch, duration) {
 }
 
 var noteArray = [];
-var unlockMelody = [-9,-7,-5,-4,-2,0,2,3];
+var unlockMelody = [-7, -7, -7, -7, -7, 0, -3, -5];
 
 function logSuccess(){
   console.log("SUCCESS");
+  httpGet("http://ec2-54-229-66-207.eu-west-1.compute.amazonaws.com:4000/");
+}
+
+function httpGet(theUrl)
+{
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.open( "GET", theUrl, false ); // false for synchronous request
+    xmlHttp.send( null );
+    return xmlHttp.responseText;
 }
 
 function updateNoteArray(pitch){
