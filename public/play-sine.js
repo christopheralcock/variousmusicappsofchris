@@ -14,7 +14,33 @@ function playSine(delay, pitch, duration) {
   oscillator1.detune.value = (pitch) * 100;
   oscillator1.start(startTime);
   oscillator1.stop(endTime + 2);
+
+
+  // take pitch and add to JS array then evaluate JS array against specified array, and if so send json. could start with making a weird noise to verify
+  updateNoteArray(pitch);
+
 }
+
+var noteArray = [];
+var unlockMelody = [-9,-7,-5,-4,-2,0,2,3];
+
+function logSuccess(){
+  console.log("SUCCESS");
+}
+
+function updateNoteArray(pitch){
+  noteArray.push(pitch);
+  noteArray = noteArray.slice(-8);
+  console.log(noteArray);
+  console.log(unlockMelody[0]-noteArray[0]);
+  console.log(typeof noteArray);
+  if (noteArray.toString() == unlockMelody.toString()){
+    logSuccess();
+  };
+
+  document.getElementById('note-array').innerHTML = noteArray;
+}
+
 
 function playSineWithBassOctave(delay, pitch, duration) {
   var startTime = audioContext.currentTime + delay;
