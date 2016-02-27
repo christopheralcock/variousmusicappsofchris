@@ -20,7 +20,7 @@ function playSine(delay, pitch, duration) {
 }
 
 var noteArray = [];
-var unlockMelody = [-7, -7, -7, -7, -7, 0, -3, -5];
+var unlockMelody = [5, 7, 3, -9, -2];
 
 function logSuccess(){
   console.log("SUCCESS");
@@ -28,7 +28,9 @@ function logSuccess(){
 }
 
 function httpGet(theUrl){
-    document.getElementById('picture').innerHTML = "<img style='position:fixed;top:0px;left:0px;width:100%;height:100%;z-index:-1;' src='http://memesvault.com/wp-content/uploads/Sloth-Goonies-Hey-You-Guys-08.gif'/>";
+    // document.getElementById('picture').innerHTML = "<img style='position:fixed;top:0px;left:0px;width:100%;height:100%;z-index:-1;' src='http://memesvault.com/wp-content/uploads/Sloth-Goonies-Hey-You-Guys-08.gif'/>";
+    document.getElementById('picture').innerHTML = '<iframe style="position:fixed;top:0px;left:0px;width:100%;height:100%;z-index:-1;" width="560" height="315" src="https://www.youtube.com/embed/4Vv5CsP1pAg?autoplay=1&showinfo=0" frameborder="0" allowfullscreen></iframe>';
+
     var xmlHttp = new XMLHttpRequest();
     xmlHttp.open( "GET", theUrl, false ); // false for synchronous request
     xmlHttp.send( null );
@@ -40,7 +42,7 @@ function httpGet(theUrl){
 
 function updateNoteArray(pitch){
   noteArray.push(pitch);
-  noteArray = noteArray.slice(-8);
+  noteArray = noteArray.slice(-5);
   console.log(noteArray);
   console.log(unlockMelody[0]-noteArray[0]);
   console.log(typeof noteArray);
