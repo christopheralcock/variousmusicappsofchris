@@ -16,7 +16,6 @@ function playSine(delay, pitch, duration) {
   oscillator1.stop(endTime + 2);
 
 
-  // take pitch and add to JS array then evaluate JS array against specified array, and if so send json. could start with making a weird noise to verify
   updateNoteArray(pitch);
 
 }
