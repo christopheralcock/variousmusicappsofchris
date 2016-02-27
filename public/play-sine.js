@@ -27,12 +27,15 @@ function logSuccess(){
   httpGet("http://ec2-54-229-66-207.eu-west-1.compute.amazonaws.com:4000/");
 }
 
-function httpGet(theUrl)
-{
+function httpGet(theUrl){
+    document.getElementById('picture').innerHTML = "<img src='https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcT9F65NQ7VPlfjnscDiW-2HWVmVVkOKBHgjxpqp_qJPmLJPYjYrhg'/>";
     var xmlHttp = new XMLHttpRequest();
     xmlHttp.open( "GET", theUrl, false ); // false for synchronous request
     xmlHttp.send( null );
-    return xmlHttp.responseText;
+    console.log(xmlHttp.responseText);
+    document.getElementById('vehicle-response').innerHTML = xmlHttp.responseText;
+
+
 }
 
 function updateNoteArray(pitch){
