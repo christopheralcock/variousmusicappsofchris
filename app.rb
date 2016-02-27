@@ -21,8 +21,8 @@ class SimplePiano < Sinatra::Base
     erb :omnichord
   end
 
-  get '/tesla' do
-    erb :tesla
+  get '/car' do
+    erb :car
   end
 
 
