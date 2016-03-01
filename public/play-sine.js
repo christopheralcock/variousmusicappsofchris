@@ -56,7 +56,7 @@ function updateNoteArray(pitch){
   relativeNoteArray = [0, (noteArray[1]-noteArray[0]), (noteArray[2]-noteArray[0]), (noteArray[3]-noteArray[0]), (noteArray[4]-noteArray[0])];
   console.log(relativeNoteArray);
   document.getElementById('note-array').innerHTML = relativeNoteArray
-  if (noteArray.toString() == unlockMelody.toString()){
+  if (relativeNoteArray.toString() == unlockMelody.toString()){
     logSuccess();
   };
   
