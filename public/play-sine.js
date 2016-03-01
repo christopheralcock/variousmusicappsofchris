@@ -55,11 +55,8 @@ function updateNoteArray(pitch){
   //  logFailure();
   //};
     
-  for (var i = 0; i < 5; i++) {
-    noteArray.push(noteArray[i]-noteArray[0]);
-    console.log(noteArray);
-  }
-  noteArray = noteArray.slice(-5);
+  newNoteArray = [0, (noteArray[1]-noteArray[0]), (noteArray[2]-noteArray[0]), (noteArray[3]-noteArray[0]), (noteArray[4]-noteArray[0])];
+  noteArray = newNoteArray;
   document.getElementById('note-array').innerHTML = noteArray
 }
 
