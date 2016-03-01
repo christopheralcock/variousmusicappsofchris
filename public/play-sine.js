@@ -107,6 +107,7 @@ function updateNoteArray(pitch){
   };
   if (relativeNoteArray.toString() == kirk.toString()){
     launchKirk();
+  };
 }
 
 
