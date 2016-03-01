@@ -24,6 +24,7 @@ var errorArray = [];
 var unlockMelody = [0, 2, -2, -14, -7];
 var closeEncounters = [0, 2, -2, -14, -7];
 var jaws = [0,1,0,1,0];
+var imperial = [0,-2,-6,1,-2];
 
 function logSuccess(){
   console.log("SUCCESS");
@@ -33,6 +34,11 @@ function logSuccess(){
 function launchJaws(){
   console.log("RAAAAARGH IM JAWS!!!!");
   document.getElementById('picture').innerHTML = '<iframe style="position:fixed;top:0px;left:0px;width:100%;height:100%;z-index:-1;" width="560" height="315" src="https://www.youtube.com/embed/BX3bN5YeiQs?autoplay=1&showinfo=0&rel=0" frameborder="0" allowfullscreen></iframe>';
+}
+
+function launchImperial(){
+  console.log("IMMA GONNA BLOW UP THE SPACE!");
+  document.getElementById('picture').innerHTML = '<iframe style="position:fixed;top:0px;left:0px;width:100%;height:100%;z-index:-1;" width="560" height="315" src="https://www.youtube.com/embed/yys5iioLUNw?autoplay=1&showinfo=0&rel=0" frameborder="0" allowfullscreen></iframe>';
 }
 
 function logFailure(){
@@ -69,6 +75,9 @@ function updateNoteArray(pitch){
   };
   if (relativeNoteArray.toString() == jaws.toString()){
     launchJaws();
+  };
+    if (relativeNoteArray.toString() == imperial.toString()){
+    launchImperial();
   };
   
 }
