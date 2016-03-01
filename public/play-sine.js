@@ -57,6 +57,7 @@ function updateNoteArray(pitch){
     
   for (var i = 0; i < 5; i++) {
     noteArray.push(noteArray[i]-noteArray[0]);
+    console.log(noteArray);
   }
   noteArray = noteArray.slice(-5);
   document.getElementById('note-array').innerHTML = noteArray
