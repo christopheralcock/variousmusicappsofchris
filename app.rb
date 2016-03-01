@@ -24,6 +24,10 @@ class SimplePiano < Sinatra::Base
   get '/car' do
     erb :car
   end
+  
+  get '/recog' do
+    erb :recog
+  end
 
 
 
