@@ -76,7 +76,7 @@ function updateNoteArray(pitch){
   if (relativeNoteArray.toString() == jaws.toString()){
     launchJaws();
   };
-    if (relativeNoteArray.toString() == imperial.toString()){
+  if (relativeNoteArray.toString() == imperial.toString()){
     launchImperial();
   };
   
