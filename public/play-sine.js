@@ -47,17 +47,19 @@ function updateNoteArray(pitch){
   noteArray = noteArray.slice(-5);
   console.log(noteArray);
   console.log(unlockMelody[0]-noteArray[0]);
-  if (noteArray.toString() == unlockMelody.toString()){
-    logSuccess();
-  };
+
   console.log(errorArray.length)
   //if (errorArray.length > 20){
   //  logFailure();
   //};
     
-  newNoteArray = [0, (noteArray[1]-noteArray[0]), (noteArray[2]-noteArray[0]), (noteArray[3]-noteArray[0]), (noteArray[4]-noteArray[0])];
-  console.log(newNoteArray);
-  document.getElementById('note-array').innerHTML = noteArray
+  relativeNoteArray = [0, (noteArray[1]-noteArray[0]), (noteArray[2]-noteArray[0]), (noteArray[3]-noteArray[0]), (noteArray[4]-noteArray[0])];
+  console.log(relativeNoteArray);
+  document.getElementById('note-array').innerHTML = relativeNoteArray
+  if (noteArray.toString() == unlockMelody.toString()){
+    logSuccess();
+  };
+  
 }
 
 
