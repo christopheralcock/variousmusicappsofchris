@@ -22,10 +22,17 @@ function playSine(delay, pitch, duration) {
 var noteArray = [];
 var errorArray = [];
 var unlockMelody = [0, 2, -2, -14, -7];
+var closeEncounters = [0, 2, -2, -14, -7];
+var jaws = [0,1,0,1,0];
 
 function logSuccess(){
   console.log("SUCCESS");
   document.getElementById('picture').innerHTML = '<iframe style="position:fixed;top:0px;left:0px;width:100%;height:100%;z-index:-1;" width="560" height="315" src="https://www.youtube.com/embed/4Vv5CsP1pAg?autoplay=1&showinfo=0&rel=0" frameborder="0" allowfullscreen></iframe>';
+}
+
+function jaws(){
+  console.log("RAAAAARGH IM JAWS!!!!");
+  document.getElementById('picture').innerHTML = '<iframe style="position:fixed;top:0px;left:0px;width:100%;height:100%;z-index:-1;" width="560" height="315" src="https://www.youtube.com/embed/BX3bN5YeiQs?autoplay=1&showinfo=0&rel=0" frameborder="0" allowfullscreen></iframe>';
 }
 
 function logFailure(){
@@ -59,6 +66,9 @@ function updateNoteArray(pitch){
   document.getElementById('note-array').innerHTML = relativeNoteArray
   if (relativeNoteArray.toString() == unlockMelody.toString()){
     logSuccess();
+  };
+  if (relativeNoteArray.toString() == jaws.toString()){
+    jaws();
   };
   
 }
