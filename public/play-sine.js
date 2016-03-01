@@ -21,7 +21,7 @@ function playSine(delay, pitch, duration) {
 
 var noteArray = [];
 var errorArray = [];
-var unlockMelody = [5, 7, 3, -9, -2];
+var unlockMelody = [0, 2, -2, -14, -7];
 
 function logSuccess(){
   console.log("SUCCESS");
