@@ -51,9 +51,9 @@ function updateNoteArray(pitch){
     logSuccess();
   };
   console.log(errorArray.length)
-  if (errorArray.length > 20){
-    logFailure();
-  };
+  //if (errorArray.length > 20){
+  //  logFailure();
+  //};
 
 }
 
