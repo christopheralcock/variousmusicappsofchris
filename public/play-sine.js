@@ -26,17 +26,14 @@ var unlockMelody = [5, 7, 3, -9, -2];
 function logSuccess(){
   console.log("SUCCESS");
   document.getElementById('picture').innerHTML = '<iframe style="position:fixed;top:0px;left:0px;width:100%;height:100%;z-index:-1;" width="560" height="315" src="https://www.youtube.com/embed/4Vv5CsP1pAg?autoplay=1&showinfo=0&rel=0" frameborder="0" allowfullscreen></iframe>';
-  httpGet("http://ec2-54-229-66-207.eu-west-1.compute.amazonaws.com:4000/");
 }
 
 function logFailure(){
   console.log("FAILURE");
   document.getElementById('picture').innerHTML = '<iframe style="position:fixed;top:0px;left:0px;width:100%;height:100%;z-index:-1;" width="560" height="315" src="https://www.youtube.com/embed/v5_3XaaeRXI?autoplay=1&showinfo=0&rel=0&start=51&end=58" frameborder="0" allowfullscreen></iframe>';
-  httpGet("http://ec2-54-229-66-207.eu-west-1.compute.amazonaws.com:4001/");
 }
 
 function httpGet(theUrl){
-    // document.getElementById('picture').innerHTML = "<img style='position:fixed;top:0px;left:0px;width:100%;height:100%;z-index:-1;' src='http://memesvault.com/wp-content/uploads/Sloth-Goonies-Hey-You-Guys-08.gif'/>";
     var xmlHttp = new XMLHttpRequest();
     xmlHttp.open( "GET", theUrl, false );
     xmlHttp.send( null );
