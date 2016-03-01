@@ -54,7 +54,7 @@ function updateNoteArray(pitch){
   //if (errorArray.length > 20){
   //  logFailure();
   //};
-
+  document.getElementById('note-array').innerHTML = noteArray
 }
 
 
