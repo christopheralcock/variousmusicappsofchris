@@ -24,7 +24,7 @@ var errorArray = [];
 var unlockMelody = [0, 2, -2, -14, -7];
 var closeEncounters = [0, 2, -2, -14, -7];
 var jaws = [0,1,0,1,0];
-var imperial = [0,-2,-6,1,-2];
+var imperial = [0,-3,-7,0,-3];
 
 function logSuccess(){
   console.log("SUCCESS");
