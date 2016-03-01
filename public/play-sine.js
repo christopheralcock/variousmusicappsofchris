@@ -30,7 +30,7 @@ function logSuccess(){
   document.getElementById('picture').innerHTML = '<iframe style="position:fixed;top:0px;left:0px;width:100%;height:100%;z-index:-1;" width="560" height="315" src="https://www.youtube.com/embed/4Vv5CsP1pAg?autoplay=1&showinfo=0&rel=0" frameborder="0" allowfullscreen></iframe>';
 }
 
-function jaws(){
+function launchJaws(){
   console.log("RAAAAARGH IM JAWS!!!!");
   document.getElementById('picture').innerHTML = '<iframe style="position:fixed;top:0px;left:0px;width:100%;height:100%;z-index:-1;" width="560" height="315" src="https://www.youtube.com/embed/BX3bN5YeiQs?autoplay=1&showinfo=0&rel=0" frameborder="0" allowfullscreen></iframe>';
 }
@@ -68,7 +68,7 @@ function updateNoteArray(pitch){
     logSuccess();
   };
   if (relativeNoteArray.toString() == jaws.toString()){
-    jaws();
+    launchJaws();
   };
   
 }
