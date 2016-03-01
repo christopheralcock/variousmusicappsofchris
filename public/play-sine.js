@@ -26,6 +26,7 @@ var closeEncounters = [0, 2, -2, -14, -7];
 var jaws = [0,1,0,1,0];
 var imperial = [0,-3,-7,0,-3];
 var goldfinger = [0,7,2,4,-4];
+var axelF = [0,0,5,0,-2];
 
 function logSuccess(){
   console.log("SUCCESS");
@@ -45,6 +46,11 @@ function launchImperial(){
 function launchGoldfinger(){
   console.log("SHE DEEEAD!!!");
   document.getElementById('picture').innerHTML = '<iframe style="position:fixed;top:0px;left:0px;width:100%;height:100%;z-index:-1;" width="560" height="315" src="https://www.youtube.com/embed/Q56PHHlzizs?autoplay=1&showinfo=0&rel=0" frameborder="0" allowfullscreen></iframe>';
+}
+
+function launchAxelF(){
+  console.log("CHARLAY MURPHYYYY!");
+  document.getElementById('picture').innerHTML = '<iframe style="position:fixed;top:0px;left:0px;width:100%;height:100%;z-index:-1;" width="560" height="315" src="https://www.youtube.com/embed/V93XY-KQfak?autoplay=1&showinfo=0&rel=0" frameborder="0" allowfullscreen></iframe>';
 }
 
 
