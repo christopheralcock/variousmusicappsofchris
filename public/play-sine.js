@@ -96,6 +96,9 @@ function updateNoteArray(pitch){
   if (relativeNoteArray.toString() == goldfinger.toString()){
     launchGoldfinger();
   };
+  if (relativeNoteArray.toString() == axelF.toString()){
+    launchAxelF();
+  };
   
 }
 
