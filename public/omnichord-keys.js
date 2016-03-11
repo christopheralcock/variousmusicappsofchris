@@ -17,7 +17,7 @@ function omnichordSetup(note, chord, keyboardKey){
   document.onkeydown = onkeyup = function(e){
       e = e || event;
       keySet[e.keyCode] = e.type == 'keydown';
-      keys = keyTranslator(keySet);
+      keys = keyTranslation.keyTranslator(keySet);
       notes = noteTranslator(notes);
 
       function strumMajor(root){

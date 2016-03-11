@@ -6,7 +6,7 @@ var notes;
 document.onkeydown = onkeyup = function(e){
     e = e || event;
     keySet[e.keyCode] = (e.type == 'keydown');
-    keys = keyTranslator(keySet);
+    keys = keyTranslation.keyTranslator(keySet);
     notes = noteTranslator(notes);
 
     if(keys.a){musicApps.playSine(0, octaveChooser(notes.c, 3), .1)}
