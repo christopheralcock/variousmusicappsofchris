@@ -9,10 +9,13 @@ var pitch = document.getElementById("pitch").innerHTML
 console.log(pitch);
 var time = new Date();
 var seconds = time.getSeconds();
+console.log(seconds);
+var milliseconds = time.getMilliseconds()/1000;
+console.log(seconds + milliseconds);
 
 
 function playSine() {
-  var startTime = audioContext.currentTime + (60 - seconds) ;
+  var startTime = audioContext.currentTime + (60 - (seconds + milliseconds) );
   var endTime = startTime + 10;
   var envelope = audioContext.createGain();
   envelope.connect(audioContext.destination);
