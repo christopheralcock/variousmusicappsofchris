@@ -1,0 +1,36 @@
+<body>
+
+<div id="pitch"><%= @ruby_pitch %></div>
+
+<script type="text/javascript">
+
+var audioContext = new AudioContext()
+var pitch = document.getElementById("pitch").innerHTML
+console.log(pitch);
+
+function playSine() {
+  var startTime = audioContext.currentTime;
+  var endTime = startTime + 10;
+  var envelope = audioContext.createGain();
+  envelope.connect(audioContext.destination);
+  envelope.gain.value = 0;
+  envelope.gain.setTargetAtTime(1, startTime, 0.1);
+  envelope.gain.setTargetAtTime(0, endTime, 0.2);
+
+  var oscillator1 = audioContext.createOscillator();
+  oscillator1.connect(envelope);
+  oscillator1.type = 'sine';
+  oscillator1.detune.value = pitch * 100;
+  oscillator1.start(startTime);
+  oscillator1.stop(endTime + 2);
+}
+
+document.onload = playSine();
+
+
+</script>
+
+
+
+fiddling with this symphony idea
+</body>

@@ -24,9 +24,14 @@ class SimplePiano < Sinatra::Base
   get '/car' do
     erb :car
   end
-  
+
   get '/recog' do
     erb :recog
+  end
+
+  get '/symph' do
+    @ruby_pitch = [-15, -11, -8].sample
+    erb :symphony
   end
 
 
