@@ -7,9 +7,12 @@
 var audioContext = new AudioContext()
 var pitch = document.getElementById("pitch").innerHTML
 console.log(pitch);
+var time = new Date();
+var seconds = time.getSeconds();
+
 
 function playSine() {
-  var startTime = audioContext.currentTime;
+  var startTime = audioContext.currentTime + (60 - seconds) ;
   var endTime = startTime + 10;
   var envelope = audioContext.createGain();
   envelope.connect(audioContext.destination);
@@ -30,7 +33,7 @@ document.onload = playSine();
 
 </script>
 
-
+<p id="time">dummy</p>
 
 fiddling with this symphony idea
 </body>
