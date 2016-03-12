@@ -1,11 +1,15 @@
 <body>
 
 <div id="pitch"><%= @ruby_pitch %></div>
+<div id="length"><%= @ruby_length %></div>
+
 
 <script type="text/javascript">
 
 var audioContext = new AudioContext()
 var pitch = document.getElementById("pitch").innerHTML
+var noteLength = document.getElementById("length").innerHTML
+
 console.log(pitch);
 var time = new Date();
 var seconds = time.getSeconds();
@@ -15,8 +19,9 @@ console.log(seconds + milliseconds);
 
 
 function playSine() {
-  var startTime = audioContext.currentTime + (60 - (seconds + milliseconds) );
-  var endTime = startTime + 10;
+  var startTime = audioContext.currentTime
+  //  + (60 - (seconds + milliseconds) );
+  var endTime = startTime + 1;
   var envelope = audioContext.createGain();
   envelope.connect(audioContext.destination);
   envelope.gain.value = 0;
@@ -29,9 +34,11 @@ function playSine() {
   oscillator1.detune.value = pitch * 100;
   oscillator1.start(startTime);
   oscillator1.stop(endTime + 2);
+
 }
 
-document.onload = playSine();
+document.onload = setInterval(playSine,noteLength);
+
 
 
 </script>
