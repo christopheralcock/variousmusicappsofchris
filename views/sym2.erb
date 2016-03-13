@@ -1,0 +1,93 @@
+WORLD WIDE MUSIC ENTERTAINMENT!
+<div id=notes><%= @notes %></div>
+<div id=noteLength><%= @noteLength %></div>
+<div id=wave><%= @wave %></div>
+<div id=loop><%= @repeatLength %></div>
+
+
+
+<script>
+  var audioContext = new AudioContext()
+  var startTime = new Date();
+  var seconds = startTime.getSeconds();
+  var milliseconds = startTime.getMilliseconds()/1000;
+  var melodyLength = document.getElementById("loop").innerHTML
+  var noteSet = JSON.parse(document.getElementById("notes").innerHTML)
+  console.log("first note: " + noteSet[0] + "second note: " + noteSet[1] + "third note" + noteSet[2])
+  var noteLength = document.getElementById("noteLength").innerHTML
+  console.log("note length:" + noteLength)
+  var wave = document.getElementById("wave").innerHTML
+  var secondsPerChord = 30;
+  document.onload = delayer();
+
+
+  function delayer(){
+    setTimeout(repeater,delayCalc())
+    console.log(delayCalc()/1000);
+  }
+
+  function delayCalc(){
+    // return ((60 - melodyLength) - (seconds + milliseconds))*1000
+    return 0
+  }
+
+  function repeater(){
+    setInterval(melody,(1000 * melodyLength))
+  }
+
+  function melody(){
+    play(0, noteSet[0], 0.5, wave)
+    play((+noteLength), noteSet[1], 0.5, wave)
+    play((2 * +noteLength), noteSet[2], 0.5, wave)
+  }
+
+  function timeInSeconds(time){
+    var seconds = time.getSeconds()
+    var minutes = time.getMinutes()
+    var hours = time.getHours()
+    var days = time.getUTCDate()
+    return seconds + (minutes * 60) + (hours * 60 * 60) + (days * 60 * 60 * 24)
+  }
+
+  function fifthsCycler(number){
+    if (number % 12 == 0){return 0};
+    if (number % 12 == 1){return 7};
+    if (number % 12 == 2){return 2};
+    if (number % 12 == 3){return 9};
+    if (number % 12 == 4){return 4};
+    if (number % 12 == 5){return 11};
+    if (number % 12 == 6){return 6};
+    if (number % 12 == 7){return 1};
+    if (number % 12 == 8){return 8};
+    if (number % 12 == 9){return 3};
+    if (number % 12 == 10){return 10};
+    if (number % 12 == 11){return 5};
+  }
+
+  function play(delay, pitch, duration, wave) {
+    console.log("played a note:" + delay + pitch + duration + wave)
+    var progressiveTime = new Date();
+    console.log("progressiveTime variable:"+ progressiveTime)
+    console.log("LOOK HERE: " + timeInSeconds(progressiveTime))
+    var secondsIntoMonth = timeInSeconds(progressiveTime)
+    var chordNumber = parseInt(secondsIntoMonth/secondsPerChord)
+    var transpose = fifthsCycler(chordNumber)
+    console.log(transpose)
+    var startTime = audioContext.currentTime + delay;
+    var endTime = startTime + duration;
+
+    var envelope = audioContext.createGain();
+    envelope.connect(audioContext.destination);
+    envelope.gain.value = 0;
+    envelope.gain.setTargetAtTime(1, startTime, 0.1);
+    envelope.gain.setTargetAtTime(0, endTime, 0.2);
+
+    var oscillator1 = audioContext.createOscillator();
+    oscillator1.connect(envelope);
+    oscillator1.type = wave;
+    oscillator1.detune.value = (pitch + transpose) * 100;
+    oscillator1.start(startTime);
+    oscillator1.stop(endTime + 2);
+  }
+
+</script>

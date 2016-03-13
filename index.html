@@ -1,0 +1,315 @@
+<!-- key translator -->
+<script type="text/javascript">
+function keyTranslator(keys) {
+  return {
+    tab: keys[9],
+    enter: keys[13],
+    shift: keys[16],
+    ctrl: keys[17],
+    alt: keys[18],
+    pauseBreak: keys[19],
+    capsLock: keys[20],
+    escape: keys[27],
+    pageUp: keys[33],
+    pageDown: keys[34],
+    end: keys[35],
+    home: keys[36],
+    leftArrow: keys[37],
+    upArrow: keys[38],
+    rightArrow: keys[39],
+    downArrow: keys[40],
+    insert: keys[45],
+    delete: keys[46],
+    num0: keys[48],
+    num1: keys[49],
+    num2: keys[50],
+    num3: keys[51],
+    num4: keys[52],
+    num5: keys[53],
+    num6: keys[54],
+    num7: keys[55],
+    num8: keys[56],
+    num9: keys[57],
+    a: keys[65],
+    b: keys[66],
+    c: keys[67],
+    d: keys[68],
+    e: keys[69],
+    f: keys[70],
+    g: keys[71],
+    h: keys[72],
+    i: keys[73],
+    j: keys[74],
+    k: keys[75],
+    l: keys[76],
+    m: keys[77],
+    n: keys[78],
+    o: keys[79],
+    p: keys[80],
+    q: keys[81],
+    r: keys[82],
+    s: keys[83],
+    t: keys[84],
+    u: keys[85],
+    v: keys[86],
+    w: keys[87],
+    x: keys[88],
+    y: keys[89],
+    z: keys[90],
+    leftWindowKey: keys[91],
+    rightWindowKey: keys[92],
+    selectKey: keys[93],
+    numpad0: keys[96],
+    numpad1: keys[97],
+    numpad2: keys[98],
+    numpad3: keys[99],
+    numpad4: keys[100],
+    numpad5: keys[101],
+    numpad6: keys[102],
+    numpad7: keys[103],
+    numpad8: keys[104],
+    numpad9: keys[105],
+    multiply: keys[106],
+    add: keys[107],
+    subtract: keys[109],
+    decimalPoint: keys[110],
+    divide: keys[111],
+    f1: keys[112],
+    f2: keys[113],
+    f3: keys[114],
+    f4: keys[115],
+    f5: keys[116],
+    f6: keys[117],
+    f7: keys[118],
+    f8: keys[119],
+    f9: keys[120],
+    f10: keys[121],
+    f11: keys[122],
+    f12: keys[123],
+    numLock: keys[144],
+    scrollLock: keys[145],
+    semiColon: keys[186],
+    equalSign: keys[187],
+    comma: keys[188],
+    dash: keys[189],
+    period: keys[190],
+    forwardSlash: keys[191],
+    graveAccent: keys[192],
+    openBracket: keys[219],
+    backSlash: keys[220],
+    closeBracket: keys[221],
+    singleQuote: keys[222]
+  }
+}
+</script>
+<!-- note translator -->
+<script type="text/javascript">
+function noteTranslator(notes) {
+  return {
+          c: 3,
+          d: 5,
+          e: 7,
+          f: 8,
+          g: 10,
+          a: 12,
+          b: 14
+        }
+}
+</script>
+<!-- pitch changers -->
+<script type="text/javascript">
+sharpen = function(note){
+  sharpNote = note +1;
+  return sharpNote;
+};
+
+flatten = function(note){
+  sharpNote = note +1;
+  return sharpNote;
+};
+
+octaveChooser = function(note, octaveNumber){
+  octavedNote = note - (4-octaveNumber)*12;
+  return octavedNote;
+};
+</script>
+<!-- play sine -->
+<script type="text/javascript">
+function playSine(delay, pitch, duration) {
+  var startTime = audioContext.currentTime + delay;
+  var endTime = startTime + duration;
+
+  var envelope = audioContext.createGain();
+  envelope.connect(audioContext.destination);
+  envelope.gain.value = 0;
+  envelope.gain.setTargetAtTime(1, startTime, 0.1);
+  envelope.gain.setTargetAtTime(0, endTime, 0.2);
+
+  var oscillator1 = audioContext.createOscillator();
+  oscillator1.connect(envelope);
+  oscillator1.type = 'sine';
+  oscillator1.detune.value = (pitch) * 100;
+  oscillator1.start(startTime);
+  oscillator1.stop(endTime + 2);
+
+  updateNoteArray(pitch);
+
+}
+
+var noteArray = [];
+var errorArray = [];
+var unlockMelody = [0, 2, -2, -14, -7];
+var closeEncounters = [0, 2, -2, -14, -7];
+var jaws = [0,1,0,1,0];
+var imperial = [0,-3,-7,0,-3];
+var goldfinger = [0,7,2,4,-4];
+var axelF = [0,0,5,0,-2];
+var kirk = [0,0,3,5,0];
+
+function logSuccess(){
+  console.log("SUCCESS");
+  document.getElementById('picture').innerHTML = '<iframe style="position:fixed;top:0px;left:0px;width:100%;height:100%;z-index:-1;" width="560" height="315" src="https://www.youtube.com/embed/JbUGsbZWitw?autoplay=1&showinfo=0&rel=0" frameborder="0" allowfullscreen></iframe>';
+}
+
+function launchJaws(){
+  console.log("RAAAAARGH IM JAWS!!!!");
+  document.getElementById('picture').innerHTML = '<iframe style="position:fixed;top:0px;left:0px;width:100%;height:100%;z-index:-1;" width="560" height="315" src="https://www.youtube.com/embed/BX3bN5YeiQs?autoplay=1&showinfo=0&rel=0" frameborder="0" allowfullscreen></iframe>';
+}
+
+function launchImperial(){
+  console.log("IMMA GONNA BLOW UP THE SPACE!");
+  document.getElementById('picture').innerHTML = '<iframe style="position:fixed;top:0px;left:0px;width:100%;height:100%;z-index:-1;" width="560" height="315" src="https://www.youtube.com/embed/yys5iioLUNw?autoplay=1&showinfo=0&rel=0" frameborder="0" allowfullscreen></iframe>';
+}
+
+function launchGoldfinger(){
+  console.log("SHE DEEEAD!!!");
+  document.getElementById('picture').innerHTML = '<iframe style="position:fixed;top:0px;left:0px;width:100%;height:100%;z-index:-1;" width="560" height="315" src="https://www.youtube.com/embed/Q56PHHlzizs?autoplay=1&showinfo=0&rel=0" frameborder="0" allowfullscreen></iframe>';
+}
+
+function launchAxelF(){
+  console.log("CHARLAY MURPHYYYY!");
+  document.getElementById('picture').innerHTML = '<iframe style="position:fixed;top:0px;left:0px;width:100%;height:100%;z-index:-1;" width="560" height="315" src="https://www.youtube.com/embed/V93XY-KQfak?autoplay=1&showinfo=0&rel=0" frameborder="0" allowfullscreen></iframe>';
+}
+
+function launchKirk(){
+  console.log("very tough!!!!!");
+  document.getElementById('picture').innerHTML = '<iframe style="position:fixed;top:0px;left:0px;width:100%;height:100%;z-index:-1;" width="560" height="315" src="https://www.youtube.com/embed/dDZ5Zozejh4?autoplay=1&showinfo=0&rel=0" frameborder="0" allowfullscreen></iframe>';
+}
+
+
+
+function logFailure(){
+  console.log("FAILURE");
+  document.getElementById('picture').innerHTML = '<iframe style="position:fixed;top:0px;left:0px;width:100%;height:100%;z-index:-1;" width="560" height="315" src="https://www.youtube.com/embed/v5_3XaaeRXI?autoplay=1&showinfo=0&rel=0&start=51&end=58" frameborder="0" allowfullscreen></iframe>';
+}
+
+function httpGet(theUrl){
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.open( "GET", theUrl, false );
+    xmlHttp.send( null );
+    console.log(xmlHttp.responseText);
+    document.getElementById('vehicle-response').innerHTML = xmlHttp.responseText;
+}
+
+function updateNoteArray(pitch){
+  noteArray.push(pitch);
+  errorArray.push(pitch);
+  noteArray = noteArray.slice(-5);
+  console.log(noteArray);
+  console.log(unlockMelody[0]-noteArray[0]);
+
+  console.log(errorArray.length)
+  //if (errorArray.length > 20){
+  //  logFailure();
+  //};
+
+  relativeNoteArray = [0, (noteArray[1]-noteArray[0]), (noteArray[2]-noteArray[0]), (noteArray[3]-noteArray[0]), (noteArray[4]-noteArray[0])];
+  console.log(relativeNoteArray);
+  console.log(unlockMelody);
+  document.getElementById('note-array').innerHTML = relativeNoteArray
+  if (relativeNoteArray.toString() == unlockMelody.toString()){
+    logSuccess();
+  };
+  if (relativeNoteArray.toString() == jaws.toString()){
+    launchJaws();
+  };
+  if (relativeNoteArray.toString() == imperial.toString()){
+    launchImperial();
+  };
+  if (relativeNoteArray.toString() == goldfinger.toString()){
+    launchGoldfinger();
+  };
+  if (relativeNoteArray.toString() == axelF.toString()){
+    launchAxelF();
+  };
+  if (relativeNoteArray.toString() == kirk.toString()){
+    launchKirk();
+  };
+}
+
+
+function playSineWithBassOctave(delay, pitch, duration) {
+  var startTime = audioContext.currentTime + delay;
+  var endTime = startTime + duration;
+
+  var envelope = audioContext.createGain();
+  envelope.connect(audioContext.destination);
+  envelope.gain.value = 0;
+  envelope.gain.setTargetAtTime(1, startTime, 0.1);
+  envelope.gain.setTargetAtTime(0, endTime, 0.2);
+
+  var oscillator1 = audioContext.createOscillator();
+  oscillator1.connect(envelope);
+  oscillator1.type = 'sine';
+  oscillator1.detune.value = (pitch) * 100;
+  oscillator1.start(startTime);
+  oscillator1.stop(endTime + 2);
+
+  var oscillator2 = audioContext.createOscillator();
+  oscillator2.connect(envelope);
+  oscillator2.type = 'sine';
+  oscillator2.detune.value = (pitch -12) * 100;
+  oscillator2.start(startTime);
+  oscillator2.stop(endTime + 2);
+};
+</script>
+<!-- piano keys -->
+<script type="text/javascript">
+var audioContext = new AudioContext()
+var keySet = [];
+var keys;
+var notes;
+
+document.onkeydown = onkeyup = function(e){
+    e = e || event;
+    keySet[e.keyCode] = (e.type == 'keydown');
+    keys = keyTranslator(keySet);
+    notes = noteTranslator(notes);
+
+    if(keys.a){playSine(0, octaveChooser(notes.c, 3), .1)}
+    if(keys.w){playSine(0, octaveChooser(sharpen(notes.c), 3), 0.1)}
+    if(keys.s){playSine(0, octaveChooser(notes.d, 3), 0.1)}
+    if(keys.e){playSine(0, octaveChooser(sharpen(notes.d), 3), 0.1)}
+    if(keys.d){playSine(0, octaveChooser(notes.e, 3), 0.1)}
+    if(keys.f){playSine(0, octaveChooser(notes.f, 3), 0.1)}
+    if(keys.t){playSine(0, octaveChooser(sharpen(notes.f), 3), 0.1)}
+    if(keys.g){playSine(0, octaveChooser(notes.g, 3), 0.1)}
+    if(keys.y){playSine(0, octaveChooser(sharpen(notes.g), 3), 0.1)}
+    if(keys.h){playSine(0, octaveChooser(notes.a, 3), 0.1)}
+    if(keys.u){playSine(0, octaveChooser(sharpen(notes.a), 3), 0.1)}
+    if(keys.j){playSine(0, octaveChooser(notes.b, 3), 0.1)}
+    if(keys.k){playSine(0, octaveChooser(notes.c, 4), 0.1)}
+    if(keys.o){playSine(0, octaveChooser(sharpen(notes.c), 4), 0.1)}
+    if(keys.l){playSine(0, octaveChooser(notes.d, 4), 0.1)}
+    if(keys.p){playSine(0, octaveChooser(sharpen(notes.d), 4), 0.1)}
+    if(keys.semiColon){playSine(0, octaveChooser(notes.e, 4), 0.1)}
+    if(keys.singleQuote){playSine(0, octaveChooser(notes.f, 4), 0.1)}
+    if(keys.closeBraket){playSine(0, octaveChooser(sharpen(notes.f), 4), 0.1)}
+    if(keys.backSlash){playSine(0, octaveChooser(notes.g, 4), 0.1)}
+}
+
+</script>
+
+<body style="background:black">
+<h1 style="color:green">PLAY THE KEYS LIKE A PIANO</h1>
+</body>
