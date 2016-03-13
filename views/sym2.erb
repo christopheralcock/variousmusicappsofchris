@@ -1,9 +1,15 @@
-WORLD WIDE MUSIC ENTERTAINMENT!
-<div id=notes><%= @notes %></div>
-<div id=noteLength><%= @noteLength %></div>
-<div id=wave><%= @wave %></div>
-<div id=loop><%= @repeatLength %></div>
+<p>This page probably won't do much if you're not on Firefox or Chrome</p>
+<p>Don't expect to hear anything from this window for <%= @repeatLength%> seconds</p>
+<h1>Procedural cycle of thirds ambient thing by <a href="http://github.com/christopheralcock">Christopher Alcock</a></h1>
+<p>These numbers relate to the notes this page will play: <span id=notes><%= @notes %></span></p>
+<p>There are <span id=noteLength><%= @noteLength %></span> seconds between each note</p>
+<p>The notes are <span id=wave><%= @wave %></span> waves</p>
+<p>The phrase is repeated every <span id=loop><%= @repeatLength %></span> seconds</p>
+<p>The chord changes every <span id=chordchange>?</span> seconds</p>
 
+
+<p><a href="/sym2" target="_blank">click to add another instrument (just opens this page in another tab - after 6 tabs, extra ones might not work)</a></p>
+<p>For best results, open the page on tabs on as many computers as you can - the chords will be in sync with eachother so long as your clocks are right. I'm not sure it will work on mobiles, though.  Hopefully will do so long as you're in Chrome or Firefox but I haven't been able to check properly.</p>
 
 
 <script>
@@ -13,13 +19,11 @@ WORLD WIDE MUSIC ENTERTAINMENT!
   var milliseconds = startTime.getMilliseconds()/1000;
   var melodyLength = document.getElementById("loop").innerHTML
   var noteSet = JSON.parse(document.getElementById("notes").innerHTML)
-  console.log("first note: " + noteSet[0] + "second note: " + noteSet[1] + "third note" + noteSet[2])
   var noteLength = document.getElementById("noteLength").innerHTML
-  console.log("note length:" + noteLength)
   var wave = document.getElementById("wave").innerHTML
-  var secondsPerChord = 30;
+  var secondsPerChord = 20;
   document.onload = delayer();
-
+  document.getElementById("chordchange").innerHTML = secondsPerChord;
 
   function delayer(){
     setTimeout(repeater,delayCalc())
@@ -64,15 +68,40 @@ WORLD WIDE MUSIC ENTERTAINMENT!
     if (number % 12 == 11){return 5};
   }
 
+  function thirdsCycler(number){
+    if (number % 24 == 0){return [0, "major"]};
+    if (number % 24 == 1){return [-3, "minor"]};
+    if (number % 24 == 2){return [5, "major"]};
+    if (number % 24 == 3){return [2, "minor"]};
+    if (number % 24 == 4){return [-2, "major"]};
+    if (number % 24 == 5){return [7, "minor"]};
+    if (number % 24 == 6){return [3, "major"]};
+    if (number % 24 == 7){return [0, "minor"]};
+    if (number % 24 == 8){return [8, "major"]};
+    if (number % 24 == 9){return [5, "minor"]};
+    if (number % 24 == 10){return [1, "major"]};
+    if (number % 24 == 11){return [-2, "minor"]};
+    if (number % 24 == 12){return [6, "major"]};
+    if (number % 24 == 13){return [3, "minor"]};
+    if (number % 24 == 14){return [-1, "major"]};
+    if (number % 24 == 15){return [8, "minor"]};
+    if (number % 24 == 16){return [4, "major"]};
+    if (number % 24 == 17){return [1, "minor"]};
+    if (number % 24 == 18){return [-3, "major"]};
+    if (number % 24 == 19){return [6, "minor"]};
+    if (number % 24 == 20){return [2, "major"]};
+    if (number % 24 == 21){return [-1, "minor"]};
+    if (number % 24 == 22){return [7, "major"]};
+    if (number % 24 == 23){return [4, "minor"]};
+  }
+
   function play(delay, pitch, duration, wave) {
-    console.log("played a note:" + delay + pitch + duration + wave)
     var progressiveTime = new Date();
-    console.log("progressiveTime variable:"+ progressiveTime)
-    console.log("LOOK HERE: " + timeInSeconds(progressiveTime))
     var secondsIntoMonth = timeInSeconds(progressiveTime)
     var chordNumber = parseInt(secondsIntoMonth/secondsPerChord)
-    var transpose = fifthsCycler(chordNumber)
-    console.log(transpose)
+    var transpose = thirdsCycler(chordNumber)[0]
+    var currentChordType = thirdsCycler(chordNumber)[1]
+    if ([-20,-8,4,16,28].includes(pitch) && currentChordType == "minor"){pitch = pitch - 1}
     var startTime = audioContext.currentTime + delay;
     var endTime = startTime + duration;
 
