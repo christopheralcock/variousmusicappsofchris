@@ -45,6 +45,10 @@ class SimplePiano < Sinatra::Base
     erb :sym2
   end
 
+  get '/panning' do
+    erb :panning
+  end
+
 
   run! if app_file == $0
 end
