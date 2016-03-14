@@ -105,6 +105,7 @@
     if ([-20,-8,4,16,28].includes(pitch) && currentChordType == "minor"){pitch = pitch - 1}
     var startTime = audioContext.currentTime + delay;
     var endTime = startTime + duration;
+    var delayLength = Math.random()
     var envelope = audioContext.createGain()
     var oscillator = audioContext.createOscillator()
     var delayInput = audioContext.createGain()
@@ -132,8 +133,11 @@
     oscillator.start(startTime);
     oscillator.stop(endTime + 2);
 
-    delayTimer.delayTime.value = 0.66
+    delayTimer.delayTime.value = delayLength
     delayFeedback.gain.value = 0.8
+
+    
+    console.log("just played a note. pitch = " + pitch + " and delay = " + delayLength)
   }
 
 </script>
