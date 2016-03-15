@@ -2,14 +2,14 @@
 <h1>Procedural cycle of thirds ambient thing by <a href="http://github.com/christopheralcock">Christopher Alcock</a></h1>
 <p>These numbers relate to the notes this page will play: <span id=notes><%= @notes %></span></p>
 <p>There are <span id=noteLength><%= @noteLength %></span> seconds between each note</p>
-<p>The notes are <span id=wave><%= @wave %></span> waves</p>
+<p>The notes are modulated <span id=wave><%= @wave %></span> waves</p>
 <p>The phrase is repeated every <span id=loop><%= @repeatLength %></span> seconds</p>
 <p>The chord changes every <span id=chordchange>?</span> seconds</p>
 
-
 <p><a href="/sym2" target="_blank">click to add another instrument (just opens this page in another tab - after 6 tabs, extra ones might not work, but you should be able to open 6 more in another window, making it ore complex and potentially interesting)</a></p>
 <p>For best results, open the page on tabs on as many computers/android devices as you can - the chords will be in sync with eachother so long as your clocks are right. I'm not sure it will work on iPhones, though.</p>
-
+<p>Since adding delay and panning to the synth, it has become pretty resource intensive, so watch out for that I guess.</p>
+<p>The code for this whole site can be read at this <a href="https://github.com/christopheralcock/variousmusicappsofchris/tree/tesla">Github</a></p>
 
 <script>
   var audioContext = new AudioContext()
@@ -52,21 +52,6 @@
     var hours = time.getHours()
     var days = time.getUTCDate()
     return seconds + (minutes * 60) + (hours * 60 * 60) + (days * 60 * 60 * 24)
-  }
-
-  function fifthsCycler(number){
-    if (number % 12 == 0){return 0};
-    if (number % 12 == 1){return 7};
-    if (number % 12 == 2){return 2};
-    if (number % 12 == 3){return 9};
-    if (number % 12 == 4){return 4};
-    if (number % 12 == 5){return 11};
-    if (number % 12 == 6){return 6};
-    if (number % 12 == 7){return 1};
-    if (number % 12 == 8){return 8};
-    if (number % 12 == 9){return 3};
-    if (number % 12 == 10){return 10};
-    if (number % 12 == 11){return 5};
   }
 
   function thirdsCycler(number){
@@ -115,7 +100,6 @@
     var delayOutput = audioContext.createGain();
     var panner = audioContext.createStereoPanner();
 
-
     panner.connect(speakers);
     delayOutput.connect(panner);
     delayInput.connect(delayOutput);
@@ -125,7 +109,6 @@
     delayInput.connect(delayTimer);
     envelope.connect(delayTimer);
     oscillator.connect(envelope);
-
 
     envelope.gain.value = 0;
     envelope.gain.setTargetAtTime(0.015, startTime, 0.1);
@@ -143,5 +126,4 @@
 
     console.log("just played a note. pitch = " + pitch + " and delay = " + delayLength);
   }
-
 </script>
