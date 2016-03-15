@@ -1,5 +1,4 @@
 <p>This page probably won't do much if you're not on Firefox or Chrome, or if you're on an iPhone. Android people might be ok.</p>
-<p>Don't expect to hear anything from this window for <%= @repeatLength%> seconds</p>
 <h1>Procedural cycle of thirds ambient thing by <a href="http://github.com/christopheralcock">Christopher Alcock</a></h1>
 <p>These numbers relate to the notes this page will play: <span id=notes><%= @notes %></span></p>
 <p>There are <span id=noteLength><%= @noteLength %></span> seconds between each note</p>
@@ -23,6 +22,7 @@
   var noteLength = document.getElementById("noteLength").innerHTML
   var wave = document.getElementById("wave").innerHTML
   var secondsPerChord = 20;
+  document.onload = melody();
   document.onload = delayer();
   document.getElementById("chordchange").innerHTML = secondsPerChord;
 
