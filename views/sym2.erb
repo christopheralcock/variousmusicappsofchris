@@ -106,15 +106,18 @@
     var startTime = audioContext.currentTime + delay;
     var endTime = startTime + duration;
     var delayLength = Math.random();
+    var panningAmount = (2 * (Math.random())) - 1;
     var envelope = audioContext.createGain();
     var oscillator = audioContext.createOscillator();
     var delayInput = audioContext.createGain();
     var delayFeedback = audioContext.createGain();
     var delayTimer = audioContext.createDelay();
     var delayOutput = audioContext.createGain();
+    var panner = audioContext.createStereoPanner();
 
 
-    delayOutput.connect(speakers);
+    panner.connect(speakers);
+    delayOutput.connect(panner);
     delayInput.connect(delayOutput);
     delayFeedback.connect(delayOutput);
     delayFeedback.connect(delayTimer);
@@ -135,6 +138,8 @@
 
     delayTimer.delayTime.value = delayLength;
     delayFeedback.gain.value = 0.8;
+
+    panner.pan.value = panningAmount;
 
     console.log("just played a note. pitch = " + pitch + " and delay = " + delayLength);
   }
