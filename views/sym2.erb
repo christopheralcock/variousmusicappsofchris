@@ -32,31 +32,18 @@
     return seconds + (minutes * 60) + (hours * 60 * 60) + (days * 60 * 60 * 24);
   }
   function thirdsCycler(number){
-    var step = number % 24;
-    if (step == 0){return [0, "major"]};
-    if (step == 1){return [-3, "minor"]};
-    if (step == 2){return [5, "major"]};
-    if (step == 3){return [2, "minor"]};
-    if (step == 4){return [-2, "major"]};
-    if (step == 5){return [7, "minor"]};
-    if (step == 6){return [3, "major"]};
-    if (step == 7){return [0, "minor"]};
-    if (step == 8){return [8, "major"]};
-    if (step == 9){return [5, "minor"]};
-    if (step == 10){return [1, "major"]};
-    if (step == 11){return [-2, "minor"]};
-    if (step == 12){return [6, "major"]};
-    if (step == 13){return [3, "minor"]};
-    if (step == 14){return [-1, "major"]};
-    if (step == 15){return [8, "minor"]};
-    if (step == 16){return [4, "major"]};
-    if (step == 17){return [1, "minor"]};
-    if (step == 18){return [-3, "major"]};
-    if (step == 19){return [6, "minor"]};
-    if (step == 20){return [2, "major"]};
-    if (step == 21){return [-1, "minor"]};
-    if (step == 22){return [7, "major"]};
-    if (step == 23){return [4, "minor"]};
+	var step = number % 24;
+	var majorOrMinor = "major"; 
+	var cycleAdjustment = 0; 
+	if (step % 2 == 1) {
+		var cycleAdjustment = 0.5;
+		var majorOrMinor = "minor";
+	}
+	var transpose = (step * -3.5) + cycleAdjustment
+	while (transpose < -3) {
+    		var transpose = transpose + 12;
+	}
+	return [transpose, majorOrMinor];
   }
   function play(delay, pitch, duration, wave) {
     var progressiveTime = new Date();
