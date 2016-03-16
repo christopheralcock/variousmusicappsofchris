@@ -1,44 +1,38 @@
 <script>
-
   var arpeggioNotes = [0,0,4,4,7];
   var octaveDistribution = [-24,-24,-12,-12,-12,0,0,0,0,0,12,12];
   var noteSet = [(sample(arpeggioNotes) + sample(octaveDistribution)), (sample(arpeggioNotes) + sample(octaveDistribution)), (sample(arpeggioNotes) + sample(octaveDistribution))];
   var noteLengths = [0.5, 0.33, 1, 0.66, 0.11, 2, 3, 5, 0.75];
   var noteLength = sample(noteLengths);
   var availableWaves = ["sine"];
-  var wave = sample(availableWaves):
+  var wave = sample(availableWaves);
   var repeatPeriods = [3,4,5,5,5.5,6,7,7.5,7.5,8,9,10,11,12,13,14,15,16];
   var melodyLength = sample(repeatPeriods);
-  var audioContext = new AudioContext()
-  var speakers = audioContext.destination
+  var audioContext = new AudioContext();
+  var speakers = audioContext.destination;
   var secondsPerChord = 20;
   document.onload = melody();
-  document.onload = setTimeout(repeater,0)
-
+  document.onload = setTimeout(repeater,0);
   function sample(array){
 	  return array[~~(Math.random() * array.length)];
   };
-
   function repeater(){
-    setInterval(melody,(1000 * melodyLength))
+    setInterval(melody,(1000 * melodyLength));
   }
-
   function melody(){
-    play(0, noteSet[0], 0.5, wave)
-    play((+noteLength), noteSet[1], 0.5, wave)
-    play((2 * +noteLength), noteSet[2], 0.5, wave)
+    play(0, noteSet[0], 0.5, wave);
+    play((+noteLength), noteSet[1], 0.5, wave);
+    play((2 * +noteLength), noteSet[2], 0.5, wave);
   }
-
   function timeInSeconds(time){
-    var seconds = time.getSeconds()
-    var minutes = time.getMinutes()
-    var hours = time.getHours()
-    var days = time.getUTCDate()
-    return seconds + (minutes * 60) + (hours * 60 * 60) + (days * 60 * 60 * 24)
+    var seconds = time.getSeconds();
+    var minutes = time.getMinutes();
+    var hours = time.getHours();
+    var days = time.getUTCDate();
+    return seconds + (minutes * 60) + (hours * 60 * 60) + (days * 60 * 60 * 24);
   }
-
   function thirdsCycler(number){
-    var step = number % 24
+    var step = number % 24;
     if (step == 0){return [0, "major"]};
     if (step == 1){return [-3, "minor"]};
     if (step == 2){return [5, "major"]};
@@ -64,14 +58,13 @@
     if (step == 22){return [7, "major"]};
     if (step == 23){return [4, "minor"]};
   }
-
   function play(delay, pitch, duration, wave) {
     var progressiveTime = new Date();
-    var secondsIntoMonth = timeInSeconds(progressiveTime)
-    var chordNumber = parseInt(secondsIntoMonth/secondsPerChord)
-    var transpose = thirdsCycler(chordNumber)[0]
-    var currentChordType = thirdsCycler(chordNumber)[1]
-    if ([-20,-8,4,16,28].includes(pitch) && currentChordType == "minor"){pitch = pitch - 1}
+    var secondsIntoMonth = timeInSeconds(progressiveTime);
+    var chordNumber = parseInt(secondsIntoMonth/secondsPerChord);
+    var transpose = thirdsCycler(chordNumber)[0];
+    var currentChordType = thirdsCycler(chordNumber)[1];
+    if ([-20,-8,4,16,28].includes(pitch) && currentChordType == "minor"){pitch = pitch - 1};
     var startTime = audioContext.currentTime + delay;
     var endTime = startTime + duration;
     var delayLength = Math.random();
@@ -83,7 +76,6 @@
     var delayTimer = audioContext.createDelay();
     var delayOutput = audioContext.createGain();
     var panner = audioContext.createStereoPanner();
-
     panner.connect(speakers);
     delayOutput.connect(panner);
     delayInput.connect(delayOutput);
@@ -93,21 +85,15 @@
     delayInput.connect(delayTimer);
     envelope.connect(delayTimer);
     oscillator.connect(envelope);
-
     envelope.gain.value = 0;
     envelope.gain.setTargetAtTime(0.015, startTime, 0.1);
     envelope.gain.setTargetAtTime(0, endTime, 0.2);
-
     oscillator.type = wave;
     oscillator.detune.value = (pitch + transpose) * 100;
     oscillator.start(startTime);
     oscillator.stop(endTime + 2);
-
     delayTimer.delayTime.value = delayLength;
     delayFeedback.gain.value = 0.8;
-
     panner.pan.value = panningAmount;
-
     console.log("just played a note. pitch = " + pitch + " and delay = " + delayLength);
-  }
 </script>
