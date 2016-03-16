@@ -1,40 +1,23 @@
-<p>This page probably won't do much if you're not on Firefox or Chrome, or if you're on an iPhone. Android people might be ok.</p>
-<h1>Procedural cycle of thirds ambient thing by <a href="http://github.com/christopheralcock">Christopher Alcock</a></h1>
-<p>These numbers relate to the notes this page will play: <span id=notes><%= @notes %></span></p>
-<p>There are <span id=noteLength><%= @noteLength %></span> seconds between each note</p>
-<p>The notes are modulated <span id=wave><%= @wave %></span> waves</p>
-<p>The phrase is repeated every <span id=loop><%= @repeatLength %></span> seconds</p>
-<p>The chord changes every <span id=chordchange>?</span> seconds</p>
-
-<p><a href="/sym2" target="_blank">click to add another instrument (just opens this page in another tab - after 6 tabs, extra ones might not work, but you should be able to open 6 more in another window, making it ore complex and potentially interesting)</a></p>
-<p>For best results, open the page on tabs on as many computers/android devices as you can - the chords will be in sync with eachother so long as your clocks are right. I'm not sure it will work on iPhones, though.</p>
-<p>Since adding delay and panning to the synth, it has become pretty resource intensive, so watch out for that I guess.</p>
-<p>The code for this whole site can be read at this <a href="https://github.com/christopheralcock/variousmusicappsofchris/tree/tesla">Github</a></p>
-
 <script>
+
+  var arpeggioNotes = [0,0,4,4,7];
+  var octaveDistribution = [-24,-24,-12,-12,-12,0,0,0,0,0,12,12];
+  var noteSet = [(sample(arpeggioNotes) + sample(octaveDistribution)), (sample(arpeggioNotes) + sample(octaveDistribution)), (sample(arpeggioNotes) + sample(octaveDistribution))];
+  var noteLengths = [0.5, 0.33, 1, 0.66, 0.11, 2, 3, 5, 0.75];
+  var noteLength = sample(noteLengths);
+  var availableWaves = ["sine"];
+  var wave = sample(availableWaves):
+  var repeatPeriods = [3,4,5,5,5.5,6,7,7.5,7.5,8,9,10,11,12,13,14,15,16];
+  var melodyLength = sample(repeatPeriods);
   var audioContext = new AudioContext()
   var speakers = audioContext.destination
-  var startTime = new Date();
-  var seconds = startTime.getSeconds();
-  var milliseconds = startTime.getMilliseconds()/1000;
-  var melodyLength = document.getElementById("loop").innerHTML
-  var noteSet = JSON.parse(document.getElementById("notes").innerHTML)
-  var noteLength = document.getElementById("noteLength").innerHTML
-  var wave = document.getElementById("wave").innerHTML
   var secondsPerChord = 20;
   document.onload = melody();
-  document.onload = delayer();
-  document.getElementById("chordchange").innerHTML = secondsPerChord;
+  document.onload = setTimeout(repeater,0)
 
-  function delayer(){
-    setTimeout(repeater,delayCalc())
-    console.log(delayCalc()/1000);
-  }
-
-  function delayCalc(){
-    // return ((60 - melodyLength) - (seconds + milliseconds))*1000
-    return 0
-  }
+  function sample(array){
+	  return array[~~(Math.random() * array.length)];
+  };
 
   function repeater(){
     setInterval(melody,(1000 * melodyLength))
@@ -55,30 +38,31 @@
   }
 
   function thirdsCycler(number){
-    if (number % 24 == 0){return [0, "major"]};
-    if (number % 24 == 1){return [-3, "minor"]};
-    if (number % 24 == 2){return [5, "major"]};
-    if (number % 24 == 3){return [2, "minor"]};
-    if (number % 24 == 4){return [-2, "major"]};
-    if (number % 24 == 5){return [7, "minor"]};
-    if (number % 24 == 6){return [3, "major"]};
-    if (number % 24 == 7){return [0, "minor"]};
-    if (number % 24 == 8){return [8, "major"]};
-    if (number % 24 == 9){return [5, "minor"]};
-    if (number % 24 == 10){return [1, "major"]};
-    if (number % 24 == 11){return [-2, "minor"]};
-    if (number % 24 == 12){return [6, "major"]};
-    if (number % 24 == 13){return [3, "minor"]};
-    if (number % 24 == 14){return [-1, "major"]};
-    if (number % 24 == 15){return [8, "minor"]};
-    if (number % 24 == 16){return [4, "major"]};
-    if (number % 24 == 17){return [1, "minor"]};
-    if (number % 24 == 18){return [-3, "major"]};
-    if (number % 24 == 19){return [6, "minor"]};
-    if (number % 24 == 20){return [2, "major"]};
-    if (number % 24 == 21){return [-1, "minor"]};
-    if (number % 24 == 22){return [7, "major"]};
-    if (number % 24 == 23){return [4, "minor"]};
+    var step = number % 24
+    if (step == 0){return [0, "major"]};
+    if (step == 1){return [-3, "minor"]};
+    if (step == 2){return [5, "major"]};
+    if (step == 3){return [2, "minor"]};
+    if (step == 4){return [-2, "major"]};
+    if (step == 5){return [7, "minor"]};
+    if (step == 6){return [3, "major"]};
+    if (step == 7){return [0, "minor"]};
+    if (step == 8){return [8, "major"]};
+    if (step == 9){return [5, "minor"]};
+    if (step == 10){return [1, "major"]};
+    if (step == 11){return [-2, "minor"]};
+    if (step == 12){return [6, "major"]};
+    if (step == 13){return [3, "minor"]};
+    if (step == 14){return [-1, "major"]};
+    if (step == 15){return [8, "minor"]};
+    if (step == 16){return [4, "major"]};
+    if (step == 17){return [1, "minor"]};
+    if (step == 18){return [-3, "major"]};
+    if (step == 19){return [6, "minor"]};
+    if (step == 20){return [2, "major"]};
+    if (step == 21){return [-1, "minor"]};
+    if (step == 22){return [7, "major"]};
+    if (step == 23){return [4, "minor"]};
   }
 
   function play(delay, pitch, duration, wave) {
