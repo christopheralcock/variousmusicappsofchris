@@ -1,5 +1,6 @@
 <script>
 
+var audioContext = new AudioContext();
 document.onload = startAMusicalPart();
 
 function startAMusicalPart(){
@@ -12,7 +13,6 @@ function startAMusicalPart(){
   var wave = sample(availableWaves);
   var repeatPeriods = [3,4,5,5,5.5,6,7,7.5,7.5,8,9,10,11,12,13,14,15,16];
   var melodyLength = sample(repeatPeriods);
-  var audioContext = new AudioContext();
   var speakers = audioContext.destination;
   var secondsPerChord = 20;
   document.onload = melody();
