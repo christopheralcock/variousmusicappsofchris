@@ -1,92 +1,18 @@
-<script>
 
-var audioContext = new AudioContext();
-document.onload = startAMusicalPart();
-
-function startAMusicalPart(){
-  var arpeggioNotes = [0,0,4,4,7];
-  var octaveDistribution = [-24,-24,-12,-12,-12,0,0,0,0,0,12,12];
-  var noteSet = [(sample(arpeggioNotes) + sample(octaveDistribution)), (sample(arpeggioNotes) + sample(octaveDistribution)), (sample(arpeggioNotes) + sample(octaveDistribution))];
-  var noteLengths = [0.5, 0.33, 1, 0.66, 0.11, 2, 3, 5, 0.75];
-  var noteLength = sample(noteLengths);
-  var availableWaves = ["sine"];
-  var wave = sample(availableWaves);
-  var repeatPeriods = [3,4,5,5,5.5,6,7,7.5,7.5,8,9,10,11,12,13,14,15,16];
-  var melodyLength = sample(repeatPeriods);
-  var speakers = audioContext.destination;
-  var secondsPerChord = 20;
-  document.onload = melody();
-  document.onload = setTimeout(repeater,0);
-  function sample(array){
-	  return array[~~(Math.random() * array.length)];
-  };
-  function repeater(){
-    setInterval(melody,(1000 * melodyLength));
-  }
-  function melody(){
-    play(0, noteSet[0], 0.5, wave);
-    play((+noteLength), noteSet[1], 0.5, wave);
-    play((2 * +noteLength), noteSet[2], 0.5, wave);
-  }
-  function timeInSeconds(time){
-    var seconds = time.getSeconds();
-    var minutes = time.getMinutes();
-    var hours = time.getHours();
-    var days = time.getUTCDate();
-    return seconds + (minutes * 60) + (hours * 60 * 60) + (days * 60 * 60 * 24);
-  }
-  function thirdsCycler(number){
-	var step = number % 24;
-	var majorOrMinor = "major"; 
-	var cycleAdjustment = 0; 
-	if (step % 2 == 1) {
-		var cycleAdjustment = 0.5;
-		var majorOrMinor = "minor";
-	}
-	var transpose = (step * -3.5) + cycleAdjustment
-	while (transpose < -3) {
-    		var transpose = transpose + 12;
-	}
-	return [transpose, majorOrMinor];
-  }
-  function play(delay, pitch, duration, wave) {
-    var progressiveTime = new Date();
-    var secondsIntoMonth = timeInSeconds(progressiveTime);
-    var chordNumber = parseInt(secondsIntoMonth/secondsPerChord);
-    var transpose = thirdsCycler(chordNumber)[0];
-    var currentChordType = thirdsCycler(chordNumber)[1];
-    if ([-20,-8,4,16,28].includes(pitch) && currentChordType == "minor"){pitch = pitch - 1};
-    var startTime = audioContext.currentTime + delay;
-    var endTime = startTime + duration;
-    var delayLength = Math.random();
-    var panningAmount = (2 * (Math.random())) - 1;
-    var envelope = audioContext.createGain();
-    var oscillator = audioContext.createOscillator();
-    var delayInput = audioContext.createGain();
-    var delayFeedback = audioContext.createGain();
-    var delayTimer = audioContext.createDelay();
-    var delayOutput = audioContext.createGain();
-    var panner = audioContext.createStereoPanner();
-    panner.connect(speakers);
-    delayOutput.connect(panner);
-    delayInput.connect(delayOutput);
-    delayFeedback.connect(delayOutput);
-    delayFeedback.connect(delayTimer);
-    delayTimer.connect(delayFeedback);
-    delayInput.connect(delayTimer);
-    envelope.connect(delayTimer);
-    oscillator.connect(envelope);
-    envelope.gain.value = 0;
-    envelope.gain.setTargetAtTime(0.015, startTime, 0.1);
-    envelope.gain.setTargetAtTime(0, endTime, 0.2);
-    oscillator.type = wave;
-    oscillator.detune.value = (pitch + transpose) * 100;
-    oscillator.start(startTime);
-    oscillator.stop(endTime + 2);
-    delayTimer.delayTime.value = delayLength;
-    delayFeedback.gain.value = 0.8;
-    panner.pan.value = panningAmount;
-    console.log("just played a note. pitch = " + (pitch+transpose) + " and delay = " + delayLength);
-   };
-   };
-</script>
+<script type="text/javascript" src="/falling3rdsApp.js"></script>
+FALLING THIRDS
+<br>
+HAVE PATIENCE
+<br>
+<span id="webAudioTest">Sadly you're using a browser that doesn't support Web Audio, so this site won't do anything for you.  Try using Firefox or Chrome, or something other than an iPhone. Sorry.  If you are using Firefox or Chrome and aren't on an iPhone and it's still not working, you might have JavaScript turned off, or have an extension that's clashing with this?</span>
+<br>
+<br>
+<button onclick="falling3rdsApp.newMusicalPart()">start/intensify</button>
+<br>
+<button onclick="falling3rdsApp.resetParts()">clear music/have patience</button>
+<br>
+<button onclick="falling3rdsApp.volumeUp()">increase volume</button>
+<br>
+volume: <span id="volume">3</span>
+<br>
+<button onclick="falling3rdsApp.volumeDown()">decrease volume</button>
