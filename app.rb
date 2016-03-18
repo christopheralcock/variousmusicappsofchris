@@ -50,7 +50,7 @@ class SimplePiano < Sinatra::Base
   end
   
   get '/sym3' do
-    erb : sym3
+    erb :sym3
   end
 
 
